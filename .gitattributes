@@ -1,0 +1,66 @@
+# General
+# CR LF: Carriage return + line feed, Unicode characters 000D + 000A
+# LF: Line feed, Unicode character 000A
+# NEL: Next line, Unicode character 0085
+# LS: Line separator, Unicode character 2028
+# PS: Paragraph separator, Unicode character 2029
+
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# General
+*.txt   text
+LICENSE text
+OWNERS  text
+*.DOC   diff=astextplain
+*.docx  diff=astextplain
+*.DOCX  diff=astextplain
+
+# Shell
+*.sh eol=lf
+
+# Git
+*.gitattributes eol=lf linguist-language=gitattributes
+*.gitignore     eol=lf
+*.gitkeep       eol=lf
+.gitattributes export-ignore
+.gitignore     export-ignore
+.gitkeep       export-ignore
+
+# configs
+.editorconfig eol=lf
+
+# markdown
+*.md text diff=markdown eol=lf
+
+# vim
+*.vim   eol=lf
+.vimrc  eol=lf
+.gvimrc eol=lf
+
+# yaml
+*.yaml eol=lf
+*.yml  eol=lf
+
+# terraform
+*.tf               eol=lf
+*.tfvars           eol=lf
+.terraform-version eol=lf
+*.hcl              eol=lf
+
+# json
+*.js   eol=lf
+*.jsx  eol=lf
+*.json eol=lf
+
+# ruby
+*.rb          eol=lf
+.ruby-version eol=lf
+Gemfile       eol=lf
+
+# python
+*.py  diff=python eol=lf
+*.py3 diff=python eol=lf
+
+# golang
+*.go diff=golang eol=lf

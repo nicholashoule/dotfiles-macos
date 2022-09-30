@@ -1,0 +1,60 @@
+# gitignore: https://git-scm.com/docs/gitignore
+# https://www.toptal.com/developers/gitignore
+
+### macos ###
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.Trash
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+### thumbnails ###
+._*
+
+### binaries and plugins ###
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+### backup & temp ###
+*.bak
+*.gho
+*.ori
+*.orig
+*.tmp
+
+### homebrew ###
+Brewfile.lock.json
+
+### ssh ###
+**/.ssh/**
+
+### cloud tools ###
+**/.aws/**
+**/.gcp/**
+
+### local tools ###
+**/.kube/**
+**/.argocd/**
+**/.minikube/**
+
+### config ###
+**/.config/**
+
+### logs ###
+logs
+*.out

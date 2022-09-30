@@ -1,0 +1,299 @@
+"  GENERAL {{{
+" =============================================================================
+
+" Vim documentation: help
+" https://vimdoc.sourceforge.net/htmldoc/
+" https://vimdoc.sourceforge.net/htmldoc/fold.html
+
+" }}}
+" FOLDING {{{
+
+" Enable folding
+set foldenable
+
+" Open up to 10 folds by default
+set foldlevelstart=0
+
+" Max nested folds
+set foldnestmax=10
+
+" foldmethod, marker, Markers are used to specify folds.
+set foldmethod=marker
+
+" Space opens/closes folds
+nnoremap <space> za
+
+" }}}
+" FUNCTIONS {{{
+
+" Toggle between number, nonumber and relativenumber
+function! ToggleNumber()
+  if(&relativenumber == 1)
+    set norelativenumber
+    set number number?
+  elseif (&number == 1)
+    set nonumber nonumber?
+  else
+    set relativenumber relativenumber?
+  endif
+endfunction
+
+" toggle between paste, and nopaste
+function! TogglePaste()
+  if(&paste == 1)
+    set nopaste nopaste?
+  else
+    set paste paste?
+  endif
+endfunction
+
+" Preparation: save last search, and cursor position
+function! Preserve(command)
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " Do the business:
+  execute a:command
+  " Clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
+endfunction
+
+" }}}
+" AUTOGROUPS {{{
+
+" :help autocommands
+" cfggroup
+augroup cfggroup
+  " Delete any old autocommands with ":autocmd!"
+  autocmd!
+  " Define the autocommands.
+  " Open file and goto previous location
+  autocmd BufReadPost *  if line("'\"") > 1 && line("'\"") <= line("$")
+      \|     exe "normal! g`\""
+      \|  endif
+  " Remove trailing whitespace on save :w
+  autocmd BufWritePre * %s/\s\+$//e
+augroup end
+
+" gzip, reading and writing compressed files
+augroup gzip
+  autocmd!
+  autocmd BufReadPre,FileReadPre     *.gz set bin
+  autocmd BufReadPost,FileReadPost   *.gz '[,']!gunzip
+  autocmd BufReadPost,FileReadPost   *.gz set nobin
+  autocmd BufReadPost,FileReadPost   *.gz execute ":doautocmd BufReadPost " . expand("%:r")
+  autocmd BufWritePost,FileWritePost *.gz !mv <afile> <afile>:r
+  autocmd BufWritePost,FileWritePost *.gz !gzip <afile>:r
+  autocmd FileAppendPre              *.gz !gunzip <afile>
+  autocmd FileAppendPre              *.gz !mv <afile>:r <afile>
+  autocmd FileAppendPost             *.gz !mv <afile> <afile>:r
+  autocmd FileAppendPost             *.gz !gzip <afile>:r
+augroup END
+
+" }}}
+" COLORS & ENCODING {{{
+
+" Syntax reset
+if exists("syntax_on")
+  syntax reset
+endif
+
+" Enable syntax highlighting
+syntax enable
+syntax on
+
+" Encoding
+set encoding=utf-8
+
+"}}}
+" PLUGIN OPTIONS {{{
+
+" Plugin: dense-analysis/ale options
+let g:ale_fix_on_save = 0
+let g:ale_open_list = 0
+let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰', '│', '─']
+let g:ale_echo_msg_format = '%severity% [%linter%] %s'
+let g:ale_change_sign_column_color = 1
+let g:ale_sign_column_always = 1
+"let g:ale_sign_error = '●'
+"let g:ale_sign_warning = '.'
+let g:ale_linters = {
+      \ 'javascript': ['prettier', 'eslint'],
+      \ 'ruby': ['rubocop'],
+      \ 'go': ['golint'],
+      \}
+let g:ale_linter_aliases = {
+      \   'Dockerfile': 'dockerfile',
+      \   'zsh': 'sh',
+      \   'csh': 'sh',
+      \   'ps1': 'powershell',
+      \   'vimwiki': 'markdown',
+      \   'xsd': ['xsd', 'xml'],
+      \   'xslt': ['xslt', 'xml'],
+      \}
+let g:ale_linters_ignore = {
+      \ 'typescript': ['tslint']
+      \}
+let g:ale_pattern_options = {'\.min.js$': {'ale_enabled': 0}}
+let g:ale_fixers = {'go': ['gofmt'], '*': ['prettier']}
+
+" Plugin: vim-airline/vim-airline options
+let g:airline_highlighting_cache = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'default'
+
+" MOVED TO THEME OPTIONS SECTION
+" Plugin: vim-airline/vim-airline-theme options
+"let g:airline_theme='luna'
+
+"}}}
+" THEME OPTIONS {{{
+
+" Set colorscheme, overriden by plugins
+"colorscheme solarized
+let g:airline_theme='bubblegum'
+
+" }}}
+" {{{ INDENTATION, SPACES & TABS
+
+" Indentation
+set autoindent
+set smartindent
+
+" Tell VIM to honor two-spaces after a period
+set cpo+=J
+
+" Spaces and tabs
+set tabstop=2
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+
+" }}}
+" UI CONFIG {{{
+
+" Disable mouse
+set mouse=
+if has('mouse')
+  set mouse=a
+endif
+
+" Give context to where the cursor is positioned in a file
+set scrolloff=16
+
+" Highlight current line
+set cursorline
+
+" Number of lines that are checked for set commands
+set modeline
+
+" Highlight column 140
+if exists('+colorcolumn')
+    set colorcolumn=80
+else
+    au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
+
+" Highlight matching brackets
+set showmatch
+
+" Highlight Trailing Whitespace
+highlight ExtraWhitespace ctermbg=darkblue guibg=darkblue
+match ExtraWhitespace /\s\+$/
+
+" Auto Complete Menu
+set completeopt=longest,menu
+
+" Set to allow you to backspace while back past insert mode
+set backspace=2
+
+" }}}
+" SEARCHING {{{
+
+" Enable highlight search and highlight when searching
+set hlsearch
+set incsearch
+
+" Ignore case when searching
+set ignorecase
+set smartcase
+
+" Turn off search highlight with <leader><space>
+nnoremap <leader><space> :nohlsearch<CR>
+
+" }}}
+" MAPPINGS & COMMANDS {{{
+
+" Move to beginning/end of line
+nnoremap B ^
+nnoremap E $
+
+" Highlight last inserted text
+nnoremap gV `[v`]
+
+" Clear whitespace at end of line with '_$'
+nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>
+
+" Quote words and lines with \q', \q", \qd
+:nnoremap <Leader>q" ciw""<Esc>P
+:nnoremap <Leader>q' ciw''<Esc>P
+:nnoremap <Leader>qd daW"=substitute(@@,"'\\\|\"","","g")<CR>P
+
+" Switch buffers with Tab & Shift-Tab
+:nnoremap <Tab> :bnext<CR>
+:nnoremap <S-Tab> :bprevious<CR>
+
+" Enable line numbers \+n
+nmap <silent> <Leader>n :call ToggleNumber()<CR>
+
+" Copy and paste to/from the system's clipboard
+noremap <Leader>y "*y
+noremap <Leader>p "*p
+noremap <Leader>Y "+y
+noremap <Leader>P "+p
+
+" Enable paste \+p
+nmap <silent> <Leader>p :call TogglePaste()<CR>
+
+" Spelling / Typos
+:command! WQ wq
+:command! Wq wq
+:command! W w
+:command! Q q
+
+" }}}
+" SESSIONS, BACKUPS & HISTORY {{{
+
+" File changes
+set autoread
+
+" Mapping key press wait timeout
+set timeout timeoutlen=1000
+
+" Hide buffers after they are abandoned
+set hidden
+
+" Increase History
+set history=10000
+
+" Disable files that don't need to be created
+set noswapfile
+set nobackup
+set nowritebackup
+
+" }}}
+" OTHER SETTINGS {{{
+
+" Persistent Undo
+if v:version >= 7.03
+    set undofile
+    set undodir=~/.vim/tmp,~/.tmp,~/tmp,~/var/tmp,/tmp
+endif
+
+" Highlight non-ASCII characters
+" https://stackoverflow.com/a/26209681
+highlight NonASCII ctermbg=DarkRed guibg=DarkRed
+call matchadd('NonASCII', '[^\u0000-\u007F]')
+
+" }}}

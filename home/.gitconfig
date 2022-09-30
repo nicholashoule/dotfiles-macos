@@ -1,0 +1,56 @@
+# Git config file
+# https://git-scm.com/docs/git-config
+; core variables
+[core]
+  whitespace = trailing-space,space-before-tab
+  editor = vim
+  filemode = false
+
+; template
+# git config --global init.templateDir ~/.git-template
+# pre-commit init-templatedir ~/.git-template
+[init]
+  templatedir = "~/.git-template"
+
+; color
+[color]
+  ui = auto
+  showBranch = auto
+  status = auto
+
+; Defaults
+[pull]
+  rebase = true
+
+[push]
+  default = matching
+
+[commit]
+  verbose = true
+
+[merge]
+  ff = only
+
+[fetch]
+  prune = true
+
+; Aliases
+[alias]
+  gconf   = config --global -e
+  hash    = rev-parse HEAD
+  ghist   = log --pretty=format:'%C(dim cyan)%G?%C(reset) %C(yellow)%h%C(reset) - %C(green)(%cr)%C(reset) %C(bold white)%an%C(reset) %s %C(bold blue)%d%C(reset)' --graph --date-order --date=relative --abbrev-commit
+  unstage = reset HEAD --
+  update  = pull --rebase
+  prune   = fetch --all --prune
+  rprune  = remote prune origin
+
+; user
+[user]
+  name = "[name]"
+  email = email@email.com
+
+; credential
+# Cache credentials in memory for a short period of time
+[credential]
+  #credential.helper=osxkeychain
+  helper = cache --timeout 7200
