@@ -16,7 +16,7 @@ brew install ruby
 
 [Ruby Version Manager - RVM](https://rvm.io/)
 
-##### Verify GCP keys
+##### Verify GPG keys
 
 ```
 brew install gnupg
@@ -45,6 +45,15 @@ curl -sSL https://get.rvm.io | bash -s stable --auto-dotfiles
 Launch vim and run `:PluginInstall`
 
 To install from command line: `vim +PluginInstall +qall`
+
+##### Set up .oh-my-zsh
+
+[GitHub - Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh)
+
+```
+export ZSH="${HOME}/.oh-my-zsh"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
 
 ##### Set up coreutils
 

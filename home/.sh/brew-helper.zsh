@@ -24,12 +24,12 @@ brew update & upgrade
 
 # Install brew packages
 brew install coreutils                # Install GNU core utilities (those that come with OS X are outdated)
-brew install moreutils                # Install some other useful utilities like `sponge`
 brew install wget --with-iri          # Install standard `vim` with IRI support
 brew install vim --override-system-vi # Install vim with vi override
 brew install findutils                # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
 brew install pre-commit               # Install pre-commit package manager (https://pre-commit.com/#install)
-#brew install grep screen tmux tree   # Install others
+brew install gnupg                    # Install gpg (GnuPG)
+#brew install grep tmux tree          # Install others
 
 ## Create symlinks
 #sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
