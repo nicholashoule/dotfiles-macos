@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/bin/zsh
+# shellcheck disable=all
 # Install command-line tools using Homebrew (https://brew.sh/)
 # Doc: https://docs.brew.sh/Installation#macos-requirements
 # Command: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"

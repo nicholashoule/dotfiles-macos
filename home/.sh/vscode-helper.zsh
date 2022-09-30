@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/bin/zsh
+# shellcheck disable=all
 # vscode
 # https://code.visualstudio.com/download
 # https://code.visualstudio.com/docs/setup/mac

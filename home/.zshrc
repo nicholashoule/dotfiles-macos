@@ -1,6 +1,10 @@
 # .zshrc
 # shellcheck disable=all
 # https://zsh.sourceforge.io/Guide/zshguide02.html
+# User
+declare DEFAULT_USER=""
+DEFAULT_USER="$(whoami)" # Set default user for the ZSH themes
+export DEFAULT_USER
 
 # Completion
 autoload -U compinit
@@ -25,18 +29,13 @@ export ZSH="${HOME}/.oh-my-zsh"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 export plugins=(git history-substring-search macos brew ssh-agent tmux)
 
-# Load SSH identities
-# id_rsa gitlab_priv gitlab_work github_priv github_work
-zstyle ':omz:plugins:ssh-agent' identities id_rsa
-
 # Options
 export ZSH_THEME="agnoster"         # Set theme to load. (agnoster, rkj-repos, ys)
 export COMPLETION_WAITING_DOTS=true # display red dots whilst waiting for completion.
 
-# User
-declare DEFAULT_USER=""
-DEFAULT_USER="$(whoami)" # Set default user for the ZSH themes
-export DEFAULT_USER
+# Load SSH identities
+# id_rsa gitlab_priv gitlab_work github_priv github_work
+zstyle ':omz:plugins:ssh-agent' identities id_rsa
 
 # Start oh-my-zsh
 zstyle ':omz:update' mode reminder

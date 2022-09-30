@@ -13,4 +13,5 @@ repos:
     rev: 3.0.0
     hooks:
       - id: shellcheck
-        args: []
+        types: [shell]
+        args: [-e, SC1071, -e, SC2034]

@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/bin/zsh
+# shellcheck disable=all
 #
 #   This file echoes a bunch of color codes to the
 #   terminal to demonstrate what's available.  Each
