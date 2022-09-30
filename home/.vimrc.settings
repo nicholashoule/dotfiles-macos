@@ -74,6 +74,10 @@ augroup cfggroup
       \|  endif
   " Remove trailing whitespace on save :w
   autocmd BufWritePre * %s/\s\+$//e
+  " Highlight non-ASCII characters
+  " https://stackoverflow.com/a/26209681
+  highlight nonascii guibg=Red ctermbg=1 term=standout
+  autocmd BufReadPost * syntax match nonascii "[^\u0000-\u007F]"
 augroup end
 
 " gzip, reading and writing compressed files
@@ -180,7 +184,7 @@ if has('mouse')
 endif
 
 " Give context to where the cursor is positioned in a file
-set scrolloff=16
+set scrolloff=10
 
 " Highlight current line
 set cursorline
@@ -290,10 +294,5 @@ if v:version >= 7.03
     set undofile
     set undodir=~/.vim/tmp,~/.tmp,~/tmp,~/var/tmp,/tmp
 endif
-
-" Highlight non-ASCII characters
-" https://stackoverflow.com/a/26209681
-highlight NonASCII ctermbg=DarkRed guibg=DarkRed
-call matchadd('NonASCII', '[^\u0000-\u007F]')
 
 " }}}
