@@ -189,9 +189,6 @@ if has('mouse')
   set mouse=a
 endif
 
-" Vim 7.4.2201
-"set signcolumn=yes
-
 " Give context to where the cursor is positioned in a file
 set scrolloff=10
 
@@ -200,6 +197,9 @@ set cursorline
 
 " Number of lines that are checked for set commands
 set modeline
+
+" Vim 7.4.2201
+set signcolumn=yes
 
 " Highlight column 140
 if exists('+colorcolumn')
@@ -308,7 +308,7 @@ set timeout timeoutlen=1000
 set hidden
 
 " Increase History
-set history=10000
+set history=100000
 
 " Disable files that don't need to be created
 set noswapfile
