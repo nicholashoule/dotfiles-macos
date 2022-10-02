@@ -5,7 +5,7 @@
 ## Completion
 autoload -U compinit
 compinit
-COMPLETION_WAITING_DOTS=true
+COMPLETION_WAITING_DOTS="%F{blue}…%f"
 export COMPLETION_WAITING_DOTS
 
 ## History
