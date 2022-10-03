@@ -69,7 +69,7 @@ alias urlencode='python3 -c "import sys, urllib.parse as ul; print(ul.quote_plus
 
 # MacOS Helpers
 # Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
-alias update='sudo softwareupdate -i -a && brew update && brew upgrade --all && brew cleanup && brew cask cleanup'
+alias update='sudo softwareupdate -i -a && brew update && brew upgrade --quiet && brew cleanup'
 
 # Delete `.DS_Store` files
 alias cleanupds="find . -type f -name '*.DS_Store' -ls -delete"
