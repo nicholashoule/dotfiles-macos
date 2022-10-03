@@ -4,6 +4,7 @@
 " Vim documentation: help
 " https://vimdoc.sourceforge.net/htmldoc/
 " https://vimdoc.sourceforge.net/htmldoc/fold.html
+" [UTF-8 Miscellaneous Symbols](https://www.w3schools.com/charsets/ref_utf_symbols.asp)
 
 " }}}
 " FOLDING {{{
@@ -38,7 +39,7 @@ function! ToggleNumber()
   endif
 endfunction
 
-" toggle between paste, and nopaste
+" Toggle between paste, and nopaste
 function! TogglePaste()
   if(&paste == 1)
     set nopaste nopaste?
@@ -57,6 +58,25 @@ function! Preserve(command)
   " Clean up: restore previous search history, and cursor position
   let @/=_s
   call cursor(l, c)
+endfunction
+
+" GitStatus(), airblade/vim-gitgutter
+function! GitStatus()
+  let [a,m,r] = GitGutterGetHunkSummary()
+  return printf('+%d ~%d -%d', a, m, r)
+endfunction
+
+" LinterStatus(), dense-analysis/ale
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? 'OK' : printf(
+    \   '%dW %dE',
+    \   all_non_errors,
+    \   all_errors
+    \)
 endfunction
 
 " }}}
@@ -113,66 +133,51 @@ set encoding=utf-8
 "}}}
 " PLUGIN OPTIONS {{{
 
+" Plugin: airblade/vim-gitgutter options
+let g:gitgutter_set_sign_backgrounds = 0
+highlight link GitGutterChangeLine DiffText
+
 " Plugin: dense-analysis/ale options
 let g:ale_fix_on_save = 0
-let g:ale_open_list = 0
 let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰', '│', '─']
-let g:ale_echo_msg_format = '%severity% [%linter%] %s'
-let g:ale_change_sign_column_color = 1
-let g:ale_sign_column_always = 1
-"let g:ale_sign_error = '●'
-"let g:ale_sign_warning = '.'
+let g:ale_echo_msg_format = '[%severity%] [%linter%] %s '
+let g:ale_set_highlights = 0
+let g:ale_change_sign_column_color = 0
+let g:ale_sign_error = '🚩'
+let g:ale_sign_warning = '🚧'
+let g:ale_pattern_options = {'\.min.js$': {'ale_enabled': 0}}
 let g:ale_linters = {
       \ 'javascript': ['prettier', 'eslint'],
       \ 'ruby': ['rubocop'],
-      \ 'go': ['golint'],
       \}
 let g:ale_linter_aliases = {
       \   'Dockerfile': 'dockerfile',
-      \   'zsh': 'sh',
-      \   'csh': 'sh',
-      \   'ps1': 'powershell',
       \   'vimwiki': 'markdown',
-      \   'xsd': ['xsd', 'xml'],
-      \   'xslt': ['xslt', 'xml'],
       \}
 let g:ale_linters_ignore = {
       \ 'typescript': ['tslint']
       \}
-let g:ale_pattern_options = {'\.min.js$': {'ale_enabled': 0}}
-let g:ale_fixers = {'go': ['gofmt'], '*': ['prettier']}
+let g:ale_fixers = {'javascript': ['eslint'], '*': ['prettier']}
 
 " Plugin: vim-airline/vim-airline options
 let g:airline_highlighting_cache = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'default'
+let g:airline#extensions#ale#enabled = 1
 
 " MOVED TO THEME OPTIONS SECTION
 " Plugin: vim-airline/vim-airline-theme options
 "let g:airline_theme='luna'
+"set statusline+=%{LinterStatus()}
+"set statusline+=%{GitStatus()}
 
 "}}}
 " THEME OPTIONS {{{
 
 " Set colorscheme, overriden by plugins
 "colorscheme solarized
-let g:airline_theme='bubblegum'
-
-" }}}
-" {{{ INDENTATION, SPACES & TABS
-
-" Indentation
-set autoindent
-set smartindent
-
-" Tell VIM to honor two-spaces after a period
-set cpo+=J
-
-" Spaces and tabs
-set tabstop=2
-set expandtab
-set shiftwidth=2
-set softtabstop=2
+let g:airline_theme='distinguished'
 
 " }}}
 " UI CONFIG {{{
@@ -191,6 +196,9 @@ set cursorline
 
 " Number of lines that are checked for set commands
 set modeline
+
+" Vim 7.4.2201
+set signcolumn=yes
 
 " Highlight column 140
 if exists('+colorcolumn')
@@ -211,6 +219,22 @@ set completeopt=longest,menu
 
 " Set to allow you to backspace while back past insert mode
 set backspace=2
+
+" }}}
+" {{{ INDENTATION, SPACES & TABS
+
+" Indentation
+set autoindent
+set smartindent
+
+" Tell VIM to honor two-spaces after a period
+set cpo+=J
+
+" Spaces and tabs
+set tabstop=2
+set expandtab
+set shiftwidth=2
+set softtabstop=2
 
 " }}}
 " SEARCHING {{{
@@ -266,6 +290,10 @@ nmap <silent> <Leader>p :call TogglePaste()<CR>
 :command! W w
 :command! Q q
 
+" ale, navigate between errors quickly
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
 " }}}
 " SESSIONS, BACKUPS & HISTORY {{{
 
@@ -273,7 +301,8 @@ nmap <silent> <Leader>p :call TogglePaste()<CR>
 set autoread
 
 " Mapping key press wait timeout
-set timeout timeoutlen=1000
+set timeout timeoutlen=50
+set ttimeoutlen=50
 
 " Hide buffers after they are abandoned
 set hidden

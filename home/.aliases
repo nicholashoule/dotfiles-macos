@@ -3,35 +3,35 @@
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then
-	colorflag='--color=always' # GNU `ls`
+	colorflag='--color=always' # GNU ls
 else
-	colorflag="-G" # OS X `ls`
+	colorflag="-G" # OS X ls
 fi
 
 # Vim aliases & helpers
-alias vi='vim'                                  # Ensure Vi IMproved
-alias PluginInstall="vim +PluginInstall +qall"  # Quick PluginInstall
-alias PluginClean='vim +Pluginclean  +qall'     # Quick PluginClean
+alias vi='vim'                                 # Ensure Vi IMproved
+alias PluginInstall="vim +PluginInstall +qall" # Quick PluginInstall
+alias PluginClean='vim +Pluginclean  +qall'    # Quick PluginClean
 
 # Canonical hex dump; some systems have this symlinked
 command -v hd > /dev/null || alias hd="hexdump -C"
-# macOS has no `md5sum`, so use `md5` as a fallback
+# macOS has no md5sum, so use md5 as a fallback
 command -v md5sum > /dev/null || alias md5sum="md5"
-# macOS has no `sha1sum`, so use `shasum` as a fallback
+# macOS has no sha1sum, so use shasum as a fallback
 command -v sha1sum > /dev/null || alias sha1sum="shasum"
 
 # General
-alias sudo='sudo '                   # Enable aliases to be sudo'ed
-alias tree='tree -C'                 # Pretty color tree
-alias path='echo -e ${PATH//:/\\n}'  # Pretty path
+alias sudo='sudo '                  # Enable aliases to be sudo'ed
+alias tree='tree -C'                # Pretty color tree
+alias path='echo -e ${PATH//:/\\n}' # Pretty path
 
 # directory listings
-alias ls="command ls -hF ${colorflag}"                      # Always use color output for `ls`
-alias l="ls -lF ${colorflag}"                               # List all files colorized in long format
+alias ls="command ls -hF ${colorflag}"                    # Always use color output for `ls`
+alias l="ls -lF ${colorflag}"                             # List all files colorized in long format
 alias l.="ls -d .* ${colorflag}"
 alias ll="ls -aF ${colorflag}"
-alias la="ls -laF ${colorflag}"                             # List all files colorized in long format, including dot files
-alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"   # List only directories
+alias la="ls -laF ${colorflag}"                           # List all files colorized in long format, including dot files
+alias lsd="ls -lF ${colorflag} | grep --color=never '^d'" # List only directories
 alias dir="ls ${colorflag}--format=vertical"
 alias vdir="ls ${colorflag} --format=long"
 
@@ -68,19 +68,19 @@ done
 alias urlencode='python3 -c "import sys, urllib.parse as ul; print(ul.quote_plus(sys.argv[1]));"'
 
 # MacOS Helpers
-# macOS Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
+# Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
 alias update='sudo softwareupdate -i -a && brew update && brew upgrade --all && brew cleanup && brew cask cleanup'
 
-# macOS Delete `.DS_Store` files
+# Delete `.DS_Store` files
 alias cleanupds="find . -type f -name '*.DS_Store' -ls -delete"
 
-# macOS System Logs to improve shell startup speed
-# macOS Empty the Trash on all mounted volumes
+# Remove system logs and empty the Trash on all mounted volumes
 alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
 
-# OSX Show/hide hidden files in Finder
+# Show/hide hidden files in Finder
+# To-do: Testing, this method might not be a solution with the latest OSX, or macOS updates
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
-# OSX Lock the screen (when going AFK)
+# Lock the screen (when going AFK)
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
