@@ -42,9 +42,13 @@ curl -sSL https://get.rvm.io | bash -s stable --auto-dotfiles
 
 [GitHub - VundleVim](https://github.com/VundleVim/Vundle.vim)
 
-Launch vim and run `:PluginInstall`
+```
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+```
 
 To install from command line: `vim +PluginInstall +qall`
+
+Launch vim and run `:PluginInstall`
 
 ##### Set up .oh-my-zsh
 
