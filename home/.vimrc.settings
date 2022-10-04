@@ -134,17 +134,19 @@ set encoding=utf-8
 " PLUGIN OPTIONS {{{
 
 " Plugin: airblade/vim-gitgutter options
-let g:gitgutter_set_sign_backgrounds = 0
-highlight link GitGutterChangeLine DiffText
+let g:gitgutter_set_sign_backgrounds = 1
+let g:gitgutter_terminal_reports_focus = 0
 
 " Plugin: dense-analysis/ale options
 let g:ale_fix_on_save = 0
+let g:ale_open_list = 0
 let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰', '│', '─']
 let g:ale_echo_msg_format = '[%severity%] [%linter%] %s '
 let g:ale_set_highlights = 0
 let g:ale_change_sign_column_color = 0
-let g:ale_sign_error = '🚩'
-let g:ale_sign_warning = '🚧'
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = 'E'
+let g:ale_sign_warning = 'W'
 let g:ale_pattern_options = {'\.min.js$': {'ale_enabled': 0}}
 let g:ale_linters = {
       \ 'javascript': ['prettier', 'eslint'],
@@ -169,8 +171,9 @@ let g:airline#extensions#ale#enabled = 1
 " MOVED TO THEME OPTIONS SECTION
 " Plugin: vim-airline/vim-airline-theme options
 "let g:airline_theme='luna'
-"set statusline+=%{LinterStatus()}
-"set statusline+=%{GitStatus()}
+set statusline=""
+set statusline=%{LinterStatus()}
+set statusline+=%{GitStatus()}
 
 "}}}
 " THEME OPTIONS {{{
@@ -189,18 +192,19 @@ if has('mouse')
 endif
 
 " Give context to where the cursor is positioned in a file
-set scrolloff=10
+set scrolloff=5
 
 " Highlight current line
 set cursorline
 
 " Number of lines that are checked for set commands
 set modeline
+set updatetime=100
 
 " Vim 7.4.2201
 set signcolumn=yes
 
-" Highlight column 140
+" Highlight column
 if exists('+colorcolumn')
     set colorcolumn=80
 else
@@ -301,8 +305,8 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 set autoread
 
 " Mapping key press wait timeout
-set timeout timeoutlen=50
-set ttimeoutlen=50
+set timeout timeoutlen=1000
+set ttimeoutlen=1000
 
 " Hide buffers after they are abandoned
 set hidden

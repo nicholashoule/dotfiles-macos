@@ -69,7 +69,7 @@ alias urlencode='python3 -c "import sys, urllib.parse as ul; print(ul.quote_plus
 
 # MacOS Helpers
 # Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
-alias update='sudo softwareupdate -i -a && brew update && brew upgrade --all && brew cleanup && brew cask cleanup'
+alias update='sudo softwareupdate -i -a && brew update && brew upgrade --quiet && brew cleanup'
 
 # Delete `.DS_Store` files
 alias cleanupds="find . -type f -name '*.DS_Store' -ls -delete"
@@ -78,9 +78,8 @@ alias cleanupds="find . -type f -name '*.DS_Store' -ls -delete"
 alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
 
 # Show/hide hidden files in Finder
-# To-do: Testing, this method might not be a solution with the latest OSX, or macOS updates
-alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
-alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+alias dotfilesshow="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+alias dotfileshide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
 # Lock the screen (when going AFK)
-alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+alias afk="osascript -e 'tell application \"System Events\" to keystroke \"q\" using {command down,control down}'"
