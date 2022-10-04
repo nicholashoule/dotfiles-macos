@@ -145,8 +145,8 @@ let g:ale_echo_msg_format = '[%severity%] [%linter%] %s '
 let g:ale_set_highlights = 0
 let g:ale_change_sign_column_color = 0
 let g:ale_sign_column_always = 1
-let g:ale_sign_error = '🚩'
-let g:ale_sign_warning = '🚧'
+let g:ale_sign_error = 'E'
+let g:ale_sign_warning = 'W'
 let g:ale_pattern_options = {'\.min.js$': {'ale_enabled': 0}}
 let g:ale_linters = {
       \ 'javascript': ['prettier', 'eslint'],
