@@ -19,7 +19,7 @@ export COMPLETION_WAITING_DOTS
 ## ZSH w/.oh-my-zsh
 # https://github.com/ohmyzsh/ohmyzsh
 ZSH="${HOME}/.oh-my-zsh"
-ZSH_THEME="agnoster"               # Set theme to load. (agnoster, rkj-repos, ys)
+ZSH_THEME="rkj-repos"              # Set theme to load. (agnoster, rkj-repos, ys)
 zstyle ':omz:update' mode reminder # Set omz update reminder
 export ZSH ZSH_THEME
 
@@ -57,14 +57,19 @@ setopt EXTENDED_HISTORY
 #   eval "$(jenv init -)"
 # fi
 
-# ## Setup others
-# # Setup other services, /usr/local/sbin/, /usr/local/opt/
-# PATH="/usr/local/sbin:$PATH"
-# PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
-# export PATH
-
 # ## Google
 # # The next line updates PATH for the Google Cloud SDK.
 # if [ -f "${HOME}/google-cloud-sdk/path.zsh.inc" ]; then . "${HOME}/google-cloud-sdk/path.zsh.inc"; fi
 # # The next line enables shell command completion for gcloud.
 # if [ -f "${HOME}/google-cloud-sdk/completion.zsh.inc" ]; then . "${HOME}/google-cloud-sdk/completion.zsh.inc"; fi
+
+## Dotnet
+# Update PATH for Dotnet and enable shell command completion
+# if [ -f "${HOME}/.dotnet/path.zsh" ]; then . "${HOME}/.dotnet/path.zsh"; fi
+# if [ -f "${HOME}/.dotnet/completion.zsh" ]; then . "${HOME}/.dotnet/completion.zsh"; fi
+
+# ## Setup others
+# # Setup other services, /usr/local/sbin/, /usr/local/opt/
+# PATH="/usr/local/sbin:$PATH"
+# PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+# export PATH

@@ -3,12 +3,16 @@
 # vscode
 # https://code.visualstudio.com/download
 # https://code.visualstudio.com/docs/setup/mac
-ZPROFILE="${HOME}/.zprofile"
-if ! grep -i 'Visual Studio Code.app' "${ZPROFILE}" 1>/dev/null 2>&1; then
-cat << EOF >> "${ZPROFILE}"
+
+# Adding Visual Studio Code (code) to .zprofile
+local ZPROFILE="${HOME}/.zprofile"
+local vscode_app_path='/Applications/Visual Studio Code.app/Contents/Resources/app/bin'
+if ! grep -i "${vscode_app_path}" "${ZPROFILE}" 1>/dev/null 2>&1; then
+(cat << EOF >> "${ZPROFILE}"
 # Add Visual Studio Code (code)
-export PATH="\${PATH}:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+export PATH="\${PATH}:${vscode_app_path}"
 EOF
+)
 source "${ZPROFILE}"
 fi
 
