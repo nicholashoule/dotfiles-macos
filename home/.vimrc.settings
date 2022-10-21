@@ -100,20 +100,20 @@ augroup cfggroup
   autocmd BufReadPost * syntax match nonascii "[^\u0000-\u007F]"
 augroup end
 
-" gzip, reading and writing compressed files
-augroup gzip
-  autocmd!
-  autocmd BufReadPre,FileReadPre     *.gz set bin
-  autocmd BufReadPost,FileReadPost   *.gz '[,']!gunzip
-  autocmd BufReadPost,FileReadPost   *.gz set nobin
-  autocmd BufReadPost,FileReadPost   *.gz execute ":doautocmd BufReadPost " . expand("%:r")
-  autocmd BufWritePost,FileWritePost *.gz !mv <afile> <afile>:r
-  autocmd BufWritePost,FileWritePost *.gz !gzip <afile>:r
-  autocmd FileAppendPre              *.gz !gunzip <afile>
-  autocmd FileAppendPre              *.gz !mv <afile>:r <afile>
-  autocmd FileAppendPost             *.gz !mv <afile> <afile>:r
-  autocmd FileAppendPost             *.gz !gzip <afile>:r
-augroup END
+"  " gzip, reading and writing compressed files
+"  augroup gzip
+"    autocmd!
+"    autocmd BufReadPre,FileReadPre     *.gz set bin
+"    autocmd BufReadPost,FileReadPost   *.gz '[,']!gunzip
+"    autocmd BufReadPost,FileReadPost   *.gz set nobin
+"    autocmd BufReadPost,FileReadPost   *.gz execute ":doautocmd BufReadPost " . expand("%:r")
+"    autocmd BufWritePost,FileWritePost *.gz !mv <afile> <afile>:r
+"    autocmd BufWritePost,FileWritePost *.gz !gzip <afile>:r
+"    autocmd FileAppendPre              *.gz !gunzip <afile>
+"    autocmd FileAppendPre              *.gz !mv <afile>:r <afile>
+"    autocmd FileAppendPost             *.gz !mv <afile> <afile>:r
+"    autocmd FileAppendPost             *.gz !gzip <afile>:r
+"  augroup END
 
 " }}}
 " COLORS & ENCODING {{{
@@ -162,10 +162,9 @@ let g:ale_linters_ignore = {
 let g:ale_fixers = {'javascript': ['eslint'], '*': ['prettier']}
 
 " Plugin: vim-airline/vim-airline options
+" Link: https://github.com/vim-airline/vim-airline
 let g:airline_highlighting_cache = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'default'
 let g:airline#extensions#ale#enabled = 1
 
 " MOVED TO THEME OPTIONS SECTION
@@ -184,6 +183,9 @@ let g:airline_theme='distinguished'
 
 " }}}
 " UI CONFIG {{{
+
+" Show commands with <leader>
+set showcmd
 
 " Disable mouse
 set mouse=
@@ -251,11 +253,11 @@ set incsearch
 set ignorecase
 set smartcase
 
-" Turn off search highlight with <leader><space>
-nnoremap <leader><space> :nohlsearch<CR>
-
 " }}}
 " MAPPINGS & COMMANDS {{{
+
+" Leader
+let mapleader = ","
 
 " Move to beginning/end of line
 nnoremap B ^
@@ -263,6 +265,9 @@ nnoremap E $
 
 " Highlight last inserted text
 nnoremap gV `[v`]
+
+" Turn off search highlight with <leader><space>
+nnoremap <leader><space> :nohlsearch<CR>
 
 " Clear whitespace at end of line with '_$'
 nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>
