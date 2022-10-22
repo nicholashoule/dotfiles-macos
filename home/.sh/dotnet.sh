@@ -21,7 +21,10 @@ typeset -r _ZSHRC="${HOME}/.zshrc"
 if ! grep -i "\${HOME}/.dotnet" "${_ZSHRC}" 1>/dev/null 2>&1; then
 (cat << EOF >> "${_ZSHRC}"
 # Dotnet
-export PATH="\${PATH}:${HOME}/.dotnet"
+DOTNET_ROOT="${HOME}/.dotnet"
+DOTNET_INSTALL_DIR="${HOME}/.dotnet"
+PATH="\${PATH}:${HOME}/.dotnet"
+export DOTNET_ROOT DOTNET_INSTALL_DIR PATH
 EOF
 )
 fi
