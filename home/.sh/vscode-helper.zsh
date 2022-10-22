@@ -5,8 +5,8 @@
 # https://code.visualstudio.com/docs/setup/mac
 
 # Adding Visual Studio Code (code) to .zprofile
-local ZPROFILE="${HOME}/.zprofile"
-local vscode_app_path='/Applications/Visual Studio Code.app/Contents/Resources/app/bin'
+typeset -r ZPROFILE="${HOME}/.zprofile"
+typeset -r vscode_app_path='/Applications/Visual Studio Code.app/Contents/Resources/app/bin'
 if ! grep -i "${vscode_app_path}" "${ZPROFILE}" 1>/dev/null 2>&1; then
 (cat << EOF >> "${ZPROFILE}"
 # Add Visual Studio Code (code)

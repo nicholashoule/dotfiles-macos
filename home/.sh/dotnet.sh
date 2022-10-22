@@ -5,11 +5,23 @@
 
 # dotnet-install
 # https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-install-script#recommended-version
-(cd "${HOME}/.dotnet" && curl -O 'https://dot.net/v1/dotnet-install.sh')
+typeset -r vcli_lab_ifile='https://dot.net/v1/dotnet-install.sh'
+(cd "${HOME}/.dotnet" && curl -sL -o 'dotnet-install' "${vcli_lab_ifile}")
+(cd "${HOME}/.dotnet" && chmod 0750 'dotnet-install')
 
 # dotnet-uninstall
 # https://github.com/dotnet/cli-lab/releases/latest
-local vcli_lab='1.5.255402'
-local vcli_lab_file='dotnet-core-uninstall.tar.gz'
-(cd "${HOME}/.dotnet" && curl -O "https://github.com/dotnet/cli-lab/releases/download/${vcli_lab}/${vcli_lab_file}")
-(cd "${HOME}/.dotnet" && tar -zxf "${vcli_lab_file}" && rm "${vcli_lab_file}")
+typeset -r vcli_lab='1.5.255402'
+typeset -r vcli_lab_ufile='dotnet-core-uninstall.tar.gz'
+(cd "${HOME}/.dotnet" && curl -sL -o "${vcli_lab_ufile}" "https://github.com/dotnet/cli-lab/releases/download/${vcli_lab}/${vcli_lab_ufile}")
+(cd "${HOME}/.dotnet" && tar -zxf "${vcli_lab_ufile}" && rm "${vcli_lab_ufile}")
+
+# Adding Dotnet to .zshrc
+typeset -r _ZSHRC="${HOME}/.zshrc"
+if ! grep -i "\${HOME}/.dotnet" "${_ZSHRC}" 1>/dev/null 2>&1; then
+(cat << EOF >> "${_ZSHRC}"
+# Dotnet
+export PATH="\${PATH}:${HOME}/.dotnet"
+EOF
+)
+fi

@@ -45,15 +45,17 @@ setopt EXTENDED_HISTORY
 
 # ## Python, pyenv
 # if command -v pyenv 1>/dev/null 2>&1; then
-#   export PYENV_ROOT="${HOME}/.pyenv"
-#   export PATH="${PYENV_ROOT}/bin:${PATH}"
+#   PYENV_ROOT="${HOME}/.pyenv"
+#   PATH="${PATH}:${PYENV_ROOT}/bin"
+#   export PYENV_ROOT PATH
 #   eval "$(pyenv init -)"
 # fi
 
 # ## JAVA, jenv
 # if command -v jenv 1>/dev/null 2>&1; then
-#   export PATH="/usr/local/opt/openjdk/bin:${PATH}"
-#   export PATH="${HOME}/.jenv/bin:${PATH}"
+#   PATH="${PATH}:/usr/local/opt/openjdk/bin"
+#   PATH="${PATH}:${HOME}/.jenv/bin"
+#   export PATH
 #   eval "$(jenv init -)"
 # fi
 
@@ -70,6 +72,6 @@ setopt EXTENDED_HISTORY
 
 # ## Setup others
 # # Setup other services, /usr/local/sbin/, /usr/local/opt/
-# PATH="/usr/local/sbin:$PATH"
-# PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+# PATH="${PATH}:/usr/local/sbin"
+# PATH="${PATH}:/usr/local/opt/openssl@1.1/bin"
 # export PATH

@@ -9,7 +9,6 @@
 #   colors (default + 8 escapes).
 #
 T='gYw' # The test text to display
-
 echo -e "\n                 40m     41m     42m     43m\
      44m     45m     46m     47m";
 
