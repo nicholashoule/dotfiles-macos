@@ -129,6 +129,7 @@ let g:ale_fixers = {'javascript': ['eslint'], '*': ['prettier']}
 " Link: https://github.com/vim-airline/vim-airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 1
+let g:airline_powerline_fonts = 1
 
 " MOVED TO THEME OPTIONS SECTION
 " Plugin: vim-airline/vim-airline-theme options
