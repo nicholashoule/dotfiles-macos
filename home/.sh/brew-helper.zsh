@@ -6,9 +6,10 @@
 
 # Ask for the administrator password upfront.
 sudo -v
-# export HOMEBREW_PREFIX=/usr/local
-# export HOMEBREW_CELLAR=/usr/local/Cellar
-# export HOMEBREW_REPOSITORY=/usr/local/Homebrew
+# HOMEBREW_PREFIX=/usr/local
+# HOMEBREW_CELLAR=/usr/local/Cellar
+# HOMEBREW_REPOSITORY=/usr/local/Homebrew
+# export HOMEBREW_PREFIX HOMEBREW_CELLAR HOMEBREW_REPOSITORY
 
 # Info
 # sudo xcode-select --install
@@ -19,20 +20,22 @@ sudo -v
 ## Permission issues
 # sudo chown -R $(whoami) $(brew --prefix)/*
 
-## Update & upgrade
-brew update & upgrade
+# Check for brew (Homebrew)
+if command -v brew 1>/dev/null 2>&1; then
+    ## Update & upgrade
+    brew update && brew upgrade
 
-# Install brew packages
-brew install coreutils                # Install GNU core utilities (those that come with OS X are outdated)
-brew install wget --with-iri          # Install standard `vim` with IRI support
-brew install vim --override-system-vi # Install vim with vi override
-brew install findutils                # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
-brew install pre-commit               # Install pre-commit package manager (https://pre-commit.com/#install)
-brew install gnupg                    # Install gpg (GnuPG)
-#brew install grep tmux tree          # Install others
+    # Install brew packages
+    brew install -sq coreutils  # Install GNU core utilities (those that come with OS X are outdated)
+    brew install -sq wget       # Install standard `vim` with IRI support
+    brew install -sq findutils  # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
+    brew install -sq pre-commit # Install pre-commit package manager (https://pre-commit.com/#install)
+    brew install -sq gnupg      # Install gpg (GnuPG)
+    brew install -sq tree       # Install tree
 
-## Create symlinks
-#sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
+    ## Create symlinks
+    #sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
 
-## Remove outdated versions
-brew cleanup
+    ## Remove outdated versions
+    brew cleanup
+fi

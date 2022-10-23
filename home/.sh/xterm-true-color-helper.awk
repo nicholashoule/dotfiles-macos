@@ -2,7 +2,7 @@
 # shellcheck disable=all
 # https://jdhao.github.io/2018/10/19/tmux_nvim_true_color/
 BEGIN{
-    s="/\\/\\/\\/\\/\\"; s=s s s s s s s s;
+    s=sprintf("%100s","");gsub(/ /,"_",s);
     for (colnum = 0; colnum<77; colnum++) {
         r = 255-(colnum*255/76);
         g = (colnum*510/76);

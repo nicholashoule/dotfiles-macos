@@ -11,7 +11,6 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " GitHub plugins
-Plugin 'airblade/vim-gitgutter'
 Plugin 'dense-analysis/ale'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'

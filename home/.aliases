@@ -1,18 +1,7 @@
 # aliases
 # https://zsh.sourceforge.io/Intro/intro_8.html
 
-# Detect which `ls` flavor is in use
-if ls --color > /dev/null 2>&1; then
-	colorflag='--color=always' # GNU ls
-else
-	colorflag="-G" # OS X ls
-fi
-
-# Vim aliases & helpers
-alias vi='vim'                                 # Ensure Vi IMproved
-alias PluginInstall="vim +PluginInstall +qall" # Quick PluginInstall
-alias PluginClean='vim +Pluginclean  +qall'    # Quick PluginClean
-
+# Commands
 # Canonical hex dump; some systems have this symlinked
 command -v hd > /dev/null || alias hd="hexdump -C"
 # macOS has no md5sum, so use md5 as a fallback
@@ -20,40 +9,52 @@ command -v md5sum > /dev/null || alias md5sum="md5"
 # macOS has no sha1sum, so use shasum as a fallback
 command -v sha1sum > /dev/null || alias sha1sum="shasum"
 
-# General
-alias sudo='sudo '                  # Enable aliases to be sudo'ed
-alias tree='tree -C'                # Pretty color tree
-alias path='echo -e ${PATH//:/\\n}' # Pretty path
+# Functions
+## f:hgrep, History with grep
+hgrep () { fc -Dlim "*$@*" 1 }
+## f:sshKeysum, Determine the ssh-keyscan checksum wtih a Base64 encoded padded output
+sshKeysum () { local chksum="${2:-sha256sum}"; for key in $(ssh-keyscan "${1}" 2>/dev/null | awk '{print $3}'); do echo -n "${key}" | base64 -d | eval "${chksum}" -b | xxd -r -p | base64; done }
+## f:pubip, Get pubiic IP address
+## Info: https://checkip.amazonaws.com, https://ipapi.co/ip/
+publicip () { local ntwkhost="${1:-https://checkip.amazonaws.com}"; curl "${ntwkhost}" }
+localip () { local ntwkint="${1:-en0}"; ipconfig getifaddr "${ntwkint}" }
+allips () { ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }' }
 
-# directory listings
-alias ls="command ls -hF ${colorflag}"                    # Always use color output for `ls`
-alias l="ls -lF ${colorflag}"                             # List all files colorized in long format
-alias l.="ls -d .* ${colorflag}"
-alias ll="ls -aF ${colorflag}"
-alias la="ls -laF ${colorflag}"                           # List all files colorized in long format, including dot files
-alias lsd="ls -lF ${colorflag} | grep --color=never '^d'" # List only directories
-alias dir="ls ${colorflag}--format=vertical"
-alias vdir="ls ${colorflag} --format=long"
+# Aliases
+# Vim, Tmux & helpers
+alias vi='vim'                                 # Ensure Vi IMproved
+alias PluginInstall="vim +PluginInstall +qall" # Quick PluginInstall
+alias PluginClean='vim +Pluginclean  +qall'    # Quick PluginClean
+alias tmuxa='tmux attach -d -t'
+
+# General
+alias sudo='sudo '                     # Enable aliases to be sudo'ed
+alias tree='tree -C'                   # Pretty color tree
+alias paths="echo -e '${PATH//:/\\n}'" # Pretty paths
+
+# Listings
+alias l="ls -lF"                 # List all files in long format
+alias ll="ls -aF"                # List all files in long format with dotfiles
+alias la="ls -laF"               # List all files in long format, including dot files
+alias l.="ls -d .*"              # List all dot directories and files
+alias llsd="ls -lF | grep '^d'"  # List only directories
+alias llsf="ls -lF | grep '^-'"  # List only files
+alias ldirs="print -rl -- *(/)"  # List directories
+alias adirs="print -rl -- *(D/)" # List directories with hidden
 
 # Shortcuts
-alias dl="cd ~/Downloads"
-alias dt="cd ~/Desktop"
+alias cdl="cd ~/Downloads"
+alias cdt="cd ~/Desktop"
 alias hist="history"
 alias timer='echo "Timer started. Stop with Ctrl-C." && $(time cat)'
 
-# Tmux aliases
-alias tmuxa='tmux attach -d -t'
-
-# Git aliases
+# Git
 alias githash='git rev-parse --verify HEAD | cut -b 1-8'
 
-# IP addresses
-alias pubip='curl https://checkip.amazonaws.com'
-alias localip="ipconfig getifaddr en0"
-alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
-
-# Flush Directory Service cache
-alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
+# IP addresses & DNS
+alias pubip=publicip
+alias locip=localip
+alias ips=allips
 
 # View HTTP traffic
 #alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
@@ -61,21 +62,26 @@ alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
 
 # One of @janmoesen ProTips
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
-	alias "$method"="lwp-request -m '$method'"
+	alias "${method}"="lwp-request -m ${method}"
 done
 
+# Alias scripting one-liners
 # URL-encode strings
 alias urlencode='python3 -c "import sys, urllib.parse as ul; print(ul.quote_plus(sys.argv[1]));"'
 
-# MacOS Helpers
+# OS, MacOS Helpers
 # Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
 alias update='sudo softwareupdate -i -a && brew update && brew upgrade --quiet && brew cleanup'
 
-# Delete `.DS_Store` files
+# Delete .DS_Store files
 alias cleanupds="find . -type f -name '*.DS_Store' -ls -delete"
 
 # Remove system logs and empty the Trash on all mounted volumes
-alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
+#alias emptytrash="osascript -e 'if trashSize > \"0\" then tell application \"Finder\" to empty trash'"
+alias emptytrash="osascript -e 'tell application \"Finder\" to empty trash'"
+
+# Flush Directory Service cache
+alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
 
 # Show/hide hidden files in Finder
 alias dotfilesshow="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
