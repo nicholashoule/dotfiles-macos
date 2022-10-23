@@ -25,7 +25,7 @@ export ZSH ZSH_THEME
 
 ## Plugins
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-plugins=(git history-substring-search macos brew ssh-agent tmux)
+plugins=(git macos brew ssh-agent tmux)
 
 # Load SSH identities
 # id_rsa gitlab_priv gitlab_work github_priv github_work

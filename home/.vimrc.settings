@@ -11,14 +11,8 @@
 
 " Enable folding
 set foldenable
-
-" Open up to 10 folds by default
 set foldlevelstart=0
-
-" Max nested folds
 set foldnestmax=10
-
-" foldmethod, marker, Markers are used to specify folds.
 set foldmethod=marker
 
 " Space opens/closes folds
@@ -60,12 +54,6 @@ function! Preserve(command)
   call cursor(l, c)
 endfunction
 
-" GitStatus(), airblade/vim-gitgutter
-function! GitStatus()
-  let [a,m,r] = GitGutterGetHunkSummary()
-  return printf('+%d ~%d -%d', a, m, r)
-endfunction
-
 " LinterStatus(), dense-analysis/ale
 function! LinterStatus() abort
     let l:counts = ale#statusline#Count(bufnr(''))
@@ -78,6 +66,7 @@ function! LinterStatus() abort
     \   all_errors
     \)
 endfunction
+set statusline+=%{LinterStatus()}
 
 " }}}
 " AUTOGROUPS {{{
@@ -100,42 +89,18 @@ augroup cfggroup
   autocmd BufReadPost * syntax match nonascii "[^\u0000-\u007F]"
 augroup end
 
-"  " gzip, reading and writing compressed files
-"  augroup gzip
-"    autocmd!
-"    autocmd BufReadPre,FileReadPre     *.gz set bin
-"    autocmd BufReadPost,FileReadPost   *.gz '[,']!gunzip
-"    autocmd BufReadPost,FileReadPost   *.gz set nobin
-"    autocmd BufReadPost,FileReadPost   *.gz execute ":doautocmd BufReadPost " . expand("%:r")
-"    autocmd BufWritePost,FileWritePost *.gz !mv <afile> <afile>:r
-"    autocmd BufWritePost,FileWritePost *.gz !gzip <afile>:r
-"    autocmd FileAppendPre              *.gz !gunzip <afile>
-"    autocmd FileAppendPre              *.gz !mv <afile>:r <afile>
-"    autocmd FileAppendPost             *.gz !mv <afile> <afile>:r
-"    autocmd FileAppendPost             *.gz !gzip <afile>:r
-"  augroup END
-
 " }}}
 " COLORS & ENCODING {{{
 
-" Syntax reset
-if exists("syntax_on")
-  syntax reset
-endif
+" Encoding
+set encoding=utf-8
 
 " Enable syntax highlighting
 syntax enable
 syntax on
 
-" Encoding
-set encoding=utf-8
-
 "}}}
 " PLUGIN OPTIONS {{{
-
-" Plugin: airblade/vim-gitgutter options
-let g:gitgutter_set_sign_backgrounds = 1
-let g:gitgutter_terminal_reports_focus = 0
 
 " Plugin: dense-analysis/ale options
 let g:ale_fix_on_save = 0
@@ -144,7 +109,6 @@ let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰', '�
 let g:ale_echo_msg_format = '[%severity%] [%linter%] %s '
 let g:ale_set_highlights = 0
 let g:ale_change_sign_column_color = 0
-let g:ale_sign_column_always = 1
 let g:ale_sign_error = 'E'
 let g:ale_sign_warning = 'W'
 let g:ale_pattern_options = {'\.min.js$': {'ale_enabled': 0}}
@@ -163,26 +127,25 @@ let g:ale_fixers = {'javascript': ['eslint'], '*': ['prettier']}
 
 " Plugin: vim-airline/vim-airline options
 " Link: https://github.com/vim-airline/vim-airline
-let g:airline_highlighting_cache = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 
 " MOVED TO THEME OPTIONS SECTION
 " Plugin: vim-airline/vim-airline-theme options
-"let g:airline_theme='luna'
-set statusline=""
-set statusline=%{LinterStatus()}
-set statusline+=%{GitStatus()}
 
 "}}}
 " THEME OPTIONS {{{
 
 " Set colorscheme, overriden by plugins
 "colorscheme solarized
-let g:airline_theme='distinguished'
+"let g:airline_theme='luna'
+let g:airline_theme='angr'
 
 " }}}
 " UI CONFIG {{{
+
+" Vim 7.4.2201
+"set signcolumn=yes
 
 " Show commands with <leader>
 set showcmd
@@ -198,13 +161,6 @@ set scrolloff=5
 
 " Highlight current line
 set cursorline
-
-" Number of lines that are checked for set commands
-set modeline
-set updatetime=100
-
-" Vim 7.4.2201
-set signcolumn=yes
 
 " Highlight column
 if exists('+colorcolumn')
