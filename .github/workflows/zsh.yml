@@ -33,7 +33,7 @@ jobs:
       - name: Homebrew
         run: |
           export POSIXLY_CORRECT="" && unset POSIXLY_CORRECT
-          sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
+          sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
       - name: Homesick
         run: |
