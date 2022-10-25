@@ -9,7 +9,8 @@ sudo -v
 # HOMEBREW_PREFIX=/usr/local
 # HOMEBREW_CELLAR=/usr/local/Cellar
 # HOMEBREW_REPOSITORY=/usr/local/Homebrew
-# export HOMEBREW_PREFIX HOMEBREW_CELLAR HOMEBREW_REPOSITORY
+# export HOMEBREW_PREFIX HOMEBREW_CELLAR HOMEBREW_REPOSITORY HOMEBREW_CASK_OPTS
+export HOMEBREW_CASK_OPTS="--appdir=~/Applications"
 
 # Info
 # sudo xcode-select --install
@@ -26,12 +27,12 @@ if command -v brew 1>/dev/null 2>&1; then
     brew update && brew upgrade
 
     # Install brew packages
-    brew install -sq coreutils  # Install GNU core utilities (those that come with OS X are outdated)
-    brew install -sq wget       # Install standard `vim` with IRI support
-    brew install -sq findutils  # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
+    brew install -sq coreutils  # Install GNU core utilities
+    brew install -sq wget       # Install GNU wget
+    brew install -sq findutils  # Install GNU find, locate, updatedb, and xargs, g-prefixed
+    brew install -sq gnupg      # Install GNU gpg (GnuPG)
+    brew install -sq tree       # Install GNU tree
     brew install -sq pre-commit # Install pre-commit package manager (https://pre-commit.com/#install)
-    brew install -sq gnupg      # Install gpg (GnuPG)
-    brew install -sq tree       # Install tree
 
     ## Create symlinks
     #sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
