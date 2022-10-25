@@ -32,8 +32,7 @@ jobs:
 
       - name: Homebrew
         run: |
-          export POSIXLY_CORRECT=""
-          export NONINTERACTIVE=1 
+          export POSIXLY_CORRECT="" && unset POSIXLY_CORRECT
           sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
 
       - name: Homesick
