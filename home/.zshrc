@@ -1,6 +1,9 @@
 # .zshrc
 # shellcheck disable=all
 # https://zsh.sourceforge.io/Guide/zshguide02.html
+LANG=en_US.UTF-8
+LC_ALL=en_US.UTF-8
+export LANG LC_ALL
 
 ## Colors
 # man ls | grep -A 50 'LSCOLORS'
@@ -19,9 +22,10 @@ export COMPLETION_WAITING_DOTS
 ## ZSH w/.oh-my-zsh
 # https://github.com/ohmyzsh/ohmyzsh
 ZSH="${HOME}/.oh-my-zsh"
-ZSH_THEME="rkj-repos"              # Set theme to load. (agnoster, rkj-repos, ys)
-zstyle ':omz:update' mode reminder # Set omz update reminder
-export ZSH ZSH_THEME
+zstyle ':omz:update' mode reminder                  # Set omz update reminder
+#ZSH_THEME="spaceship"                              # Set theme to load. (agnoster, rkj-repos, ys)
+source $(brew --prefix)/opt/spaceship/spaceship.zsh # (brew install spaceship), https://github.com/spaceship-prompt/spaceship-prompt
+export ZSH
 
 ## Plugins
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)

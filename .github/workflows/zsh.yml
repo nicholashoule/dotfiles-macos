@@ -1,0 +1,53 @@
+name: zsh
+
+# Controls when the workflow will run
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  testing:
+    name: Testing on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macOS-latest]
+        ruby: ["2.7", "3.1"]
+
+    steps:
+      - name: Set up environment ${{ matrix.ruby }}
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+
+      - name: Check out repo
+        uses: actions/checkout@v3
+
+      - name: Homebrew
+        run: |
+          export NONINTERACTIVE=1 
+          sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
+
+      - name: Homesick
+        run: |
+          gem install homesick
+          homesick clone nicholashoule/dotfiles-macos
+          homesick symlink dotfiles
+
+      - name: oh-my-zsh
+        run: |
+          export ZSH="${HOME}/.oh-my-zsh"
+          sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+      - name: brew
+        run: |
+          export HOMEBREW_CASK_OPTS="--appdir=~/Applications"
+          brew update
+          brew install coreutils

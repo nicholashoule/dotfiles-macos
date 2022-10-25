@@ -1,34 +1,22 @@
 # dotfiles-macos
 
-This repo depends on the [Homesick](https://github.com/technicalpickles/homesick) project to manage dotfiles.
+## macOS
 
-#### OS
-
-- macOS
+This repo depends on the [Homesick](https://github.com/technicalpickles/homesick) & [Homebrew](https://github.com/Homebrew/brew) projects to manage system dotfiles.
 
 ### Required: Ruby
 
-[homebrew - Ruby](https://www.ruby-lang.org/en/documentation/installation/)
+[Homebrew - Ruby](https://www.ruby-lang.org/en/documentation/installation/)
 
 ```
 brew install ruby
 ```
 
-[Ruby Version Manager - RVM](https://rvm.io/)
+###### [Ruby Version Manager - RVM](https://rvm.io/)
 
-##### Verify GPG keys
+---
 
-```
-brew install gnupg
-```
-
-##### RVM Installation
-
-```
-curl -sSL https://get.rvm.io | bash -s stable --auto-dotfiles
-```
-
-### To configure dotfiles
+### Configure dotfiles with Homesick
 
 1. Install Homesick with `gem install homesick`
 2. Clone this castle with `homesick clone nicholashoule/dotfiles-macos`
@@ -36,41 +24,59 @@ curl -sSL https://get.rvm.io | bash -s stable --auto-dotfiles
 
 ---
 
-#### Other post-configurations
+### Post-configurations
 
-##### Set up VundleVim
+#### Set up VundleVim
 
-[GitHub - VundleVim](https://github.com/VundleVim/Vundle.vim)
+###### [GitHub - VundleVim](https://github.com/VundleVim/Vundle.vim)
 
 ```
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ```
 
-To install from command line: `vim +PluginInstall +qall`
+- To install from command line: `vim +PluginInstall +qall`
+- To install inside Vim, launch vim and run `:PluginInstall`
 
-Launch vim and run `:PluginInstall`
+#### Set up .oh-my-zsh
 
-##### Set up .oh-my-zsh
-
-[GitHub - Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh)
+###### [GitHub - Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh)
 
 ```
 export ZSH="${HOME}/.oh-my-zsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-##### Set up coreutils
+#### Set up Spaceship (Theme)
 
-[homebrew - coreutils](https://formulae.brew.sh/formula/coreutils)
+###### [zsh - Spaceship](https://github.com/spaceship-prompt/spaceship-prompt)
+
+```
+brew install spaceship
+```
+
+#### Set up Nerd Fonts (Fonts)
+
+###### [zsh - Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
+
+```
+brew tap homebrew/cask-fonts
+brew install --cask font-hack-nerd-font
+```
+
+#### Set up coreutils
+
+###### [homebrew - coreutils](https://formulae.brew.sh/formula/coreutils)
 
 ```
 brew install coreutils
 ```
 
-##### Set up pre-commit
+#### Set up pre-commit
 
-[homebrew - pre-commit](https://pre-commit.com/#installation)
+###### [homebrew - pre-commit](https://pre-commit.com/#installation)
 
 ```
 brew install pre-commit
 ```
+
+---
