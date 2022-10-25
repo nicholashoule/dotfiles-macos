@@ -1,9 +1,18 @@
 # .zshrc
 # shellcheck disable=all
 # https://zsh.sourceforge.io/Guide/zshguide02.html
-LANG=en_US.UTF-8
-LC_ALL=en_US.UTF-8
-export LANG LC_ALL
+
+# ## Locale
+# LANG=en_US.UTF-8
+# LC_ALL=en_US.UTF-8
+# export LANG LC_ALL
+
+## Completion
+# Rebuild: rm -f ~/.zcompdump && compinit
+autoload -Uz compinit
+compinit
+COMPLETION_WAITING_DOTS="%F{blue}…%f"
+export COMPLETION_WAITING_DOTS
 
 ## Colors
 # man ls | grep -A 50 'LSCOLORS'
@@ -13,33 +22,29 @@ LSCOLORS=Gxfxcxdxbxegedabagacad
 zstyle ':completion:*' list-colors "${(s.:.)LSCOLORS}"
 export CLICOLOR COLORTERM LSCOLORS
 
-## Completion
-autoload -U compinit
-compinit
-COMPLETION_WAITING_DOTS="%F{blue}…%f"
-export COMPLETION_WAITING_DOTS
-
 ## ZSH w/.oh-my-zsh
 # https://github.com/ohmyzsh/ohmyzsh
 ZSH="${HOME}/.oh-my-zsh"
-zstyle ':omz:update' mode reminder                  # Set omz update reminder
-#ZSH_THEME="spaceship"                              # Set theme to load. (agnoster, rkj-repos, ys)
-source $(brew --prefix)/opt/spaceship/spaceship.zsh # (brew install spaceship), https://github.com/spaceship-prompt/spaceship-prompt
+zstyle ':omz:update' mode reminder # Set omz update reminder
 export ZSH
 
 ## Plugins
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 plugins=(git macos brew ssh-agent tmux)
 
-# Load SSH identities
+## Load SSH identities
 # id_rsa gitlab_priv gitlab_work github_priv github_work
 zstyle ':omz:plugins:ssh-agent' identities id_rsa
 
-# Start oh-my-zsh
+## Start oh-my-zsh
 source "${ZSH}/oh-my-zsh.sh"
 
-# Source other configs
+## Source other configs
 source "${HOME}/.aliases"
+
+## Themes
+#ZSH_THEME="spaceship"                              # Set theme to load. (agnoster, rkj-repos)
+source $(brew --prefix)/opt/spaceship/spaceship.zsh # (brew install spaceship), https://github.com/spaceship-prompt/spaceship-prompt
 
 ## History
 # zstyle -L, zstyle :completion:history-words:

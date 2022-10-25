@@ -26,12 +26,17 @@ if command -v brew 1>/dev/null 2>&1; then
     ## Update & upgrade
     brew update && brew upgrade
 
-    # Install brew packages
+    # Install somre core packages
     brew install -sq coreutils  # Install GNU core utilities
     brew install -sq wget       # Install GNU wget
     brew install -sq findutils  # Install GNU find, locate, updatedb, and xargs, g-prefixed
     brew install -sq gnupg      # Install GNU gpg (GnuPG)
     brew install -sq tree       # Install GNU tree
+    brew install dos2unix       # Install GNU dos2unix
+
+    # Install other packages
+    brew install tmux           # Install tmux
+    brew install jq             # Install jq
     brew install -sq pre-commit # Install pre-commit package manager (https://pre-commit.com/#install)
 
     ## Create symlinks
