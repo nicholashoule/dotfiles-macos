@@ -32,7 +32,7 @@ jobs:
 
       - name: Homebrew
         run: |
-          unset POSIXLY_CORRECT
+          export POSIXLY_CORRECT=""
           export NONINTERACTIVE=1 
           sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
 
