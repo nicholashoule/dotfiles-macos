@@ -43,3 +43,4 @@ SPACESHIP_EXEC_TIME_SHOW=false
 ## Git
 # https://spaceship-prompt.sh/sections/git/
 SPACESHIP_GIT_STATUS_SHOW=true
+SPACESHIP_GIT_STATUS_COLOR="yellow"
