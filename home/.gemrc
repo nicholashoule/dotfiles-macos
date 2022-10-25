@@ -1,1 +1,11 @@
+---
 gem: --no-rdoc --no-ri
+---
+gem: --no-ri --no-rdoc
+:verbose: false
+:backtrace: false
+:bulk_threshold: 1000
+:update_sources: true
+:sources:
+  - https://rubygems.org
+  - https://gems.rubyforge.org

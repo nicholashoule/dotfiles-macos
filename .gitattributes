@@ -17,26 +17,32 @@ OWNERS  text
 *.DOCX  diff=astextplain
 
 # Shell
-*.sh eol=lf
+*.sh      eol=lf
+*.zsh     eol=lf
+*.awk     eol=lf
+*.aliases eol=lf
 
 # Git
 *.gitattributes eol=lf linguist-language=gitattributes
 *.gitignore     eol=lf
 *.gitkeep       eol=lf
+*.gitmodules    eol=lf
 .gitattributes export-ignore
 .gitignore     export-ignore
 .gitkeep       export-ignore
+.gitmodules    export-ignore
 
 # configs
 .editorconfig eol=lf
+.tmux.conf    eol=lf
 
 # markdown
 *.md text diff=markdown eol=lf
 
 # vim
-*.vim   eol=lf
-.vimrc  eol=lf
-.gvimrc eol=lf
+*.vim           eol=lf
+.vimrc          eol=lf
+.vimrc.settings eol=lf
 
 # yaml
 *.yaml eol=lf
@@ -57,6 +63,9 @@ OWNERS  text
 *.rb          eol=lf
 .ruby-version eol=lf
 Gemfile       eol=lf
+
+# homebrew
+Brewfile eol=lf
 
 # python
 *.py  diff=python eol=lf

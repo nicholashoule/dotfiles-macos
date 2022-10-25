@@ -2,11 +2,11 @@
 
 ## macOS
 
-This repo depends on the [Homesick](https://github.com/technicalpickles/homesick) & [Homebrew](https://github.com/Homebrew/brew) projects to manage system dotfiles.
+This git repo depends on the [Homebrew](https://github.com/Homebrew/brew), [Homesick](https://github.com/technicalpickles/homesick) & [Spaceship Prompt](https://github.com/spaceship-prompt/spaceship-prompt) projects to manage system dotfiles.
 
 ### Required: Ruby
 
-[Homebrew - Ruby](https://www.ruby-lang.org/en/documentation/installation/)
+###### [Homebrew - Ruby](https://www.ruby-lang.org/en/documentation/installation/)
 
 ```
 brew install ruby
@@ -24,7 +24,7 @@ brew install ruby
 
 ---
 
-### Post-configurations
+## Git submodules
 
 #### Set up VundleVim
 
@@ -46,37 +46,29 @@ export ZSH="${HOME}/.oh-my-zsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-#### Set up Spaceship (Theme)
+## Post-configurations
 
-###### [zsh - Spaceship](https://github.com/spaceship-prompt/spaceship-prompt)
+#### Theme - Set up Spaceship
+
+###### [Spaceship Prompt](https://github.com/spaceship-prompt/spaceship-prompt)
 
 ```
 brew install spaceship
 ```
 
-#### Set up Nerd Fonts (Fonts)
+#### Fonts - Set up Nerd Fonts
 
-###### [zsh - Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
+###### [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
 
 ```
 brew tap homebrew/cask-fonts
 brew install --cask font-hack-nerd-font
 ```
 
-#### Set up coreutils
+#### Homebrew
 
-###### [homebrew - coreutils](https://formulae.brew.sh/formula/coreutils)
-
-```
-brew install coreutils
-```
-
-#### Set up pre-commit
-
-###### [homebrew - pre-commit](https://pre-commit.com/#installation)
+###### [Brewfile](home/Brewfile)
 
 ```
-brew install pre-commit
+brew bundle
 ```
-
----
