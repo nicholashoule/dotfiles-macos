@@ -26,7 +26,7 @@ if command -v brew 1>/dev/null 2>&1; then
     ## Update & upgrade
     brew update && brew upgrade
 
-    # Install somre core packages
+    # Install core packages
     brew install -sq coreutils  # Install GNU core utilities
     brew install -sq wget       # Install GNU wget
     brew install -sq findutils  # Install GNU find, locate, updatedb, and xargs, g-prefixed
