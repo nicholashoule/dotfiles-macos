@@ -1,11 +1,15 @@
 # Brewfile
 # https://github.com/Homebrew/homebrew-bundle
-# tap "homebrew/cask"
+
+## Taps
+tap "homebrew/core"
 tap "homebrew/cask-fonts"
 
+## Settings
 # set arguments for all 'brew install --cask' commands
 cask_args appdir: "~/Applications", require_sha: true
 
+## Brew
 # Install core packages
 brew "coreutils" 
 brew "wget"        
@@ -14,7 +18,7 @@ brew "gnupg" if OS.mac?
 brew "tree"      
 brew "dos2unix"   
 
-# Others
+# Install other packages
 #brew "mysql@5.6", restart_service: true, link: true, conflicts_with: ["mysql"] # MySQL 5.6
 brew "tmux" 
 brew "jq"   
@@ -22,4 +26,4 @@ brew "pre-commit" # Install pre-commit package manager (https://pre-commit.com/#
 
 # Themes & Fonts
 brew "spaceship"           # Theme, https://github.com/spaceship-prompt/spaceship-prompt
-brew "font-hack-nerd-font" # Fonts, https://github.com/ryanoasis/nerd-fonts
+cask "font-hack-nerd-font" # Fonts, https://github.com/ryanoasis/nerd-fonts

@@ -2,21 +2,22 @@
 # https://git-scm.com/docs/git-config
 ; core variables
 [core]
-  whitespace = trailing-space,space-before-tab
-  editor = vim
-  filemode = false
+  whitespace = trailing-space,space-before-tab,cr-at-eol
+  editor     = vim
+  filemode   = false
 
 ; template
 # git config --global init.templateDir ~/.git-template
 # pre-commit init-templatedir ~/.git-template
 [init]
-  templatedir = "~/.git-template"
+  templatedir   = "~/.git-template"
+  defaultBranch = main
 
 ; color
 [color]
-  ui = auto
+  ui         = auto
   showBranch = auto
-  status = auto
+  status     = auto
 
 ; Defaults
 [pull]
@@ -36,6 +37,8 @@
 
 ; Aliases
 [alias]
+  br      = branch
+  co      = checkout
   gconf   = config --global -e
   hash    = rev-parse HEAD
   ghist   = log --pretty=format:'%C(dim cyan)%G?%C(reset) %C(yellow)%h%C(reset) - %C(green)(%cr)%C(reset) %C(bold white)%an%C(reset) %s %C(bold blue)%d%C(reset)' --graph --date-order --date=relative --abbrev-commit
@@ -46,11 +49,15 @@
 
 ; user
 [user]
-  name = "[name]"
-  email = email@email.com
+  name     = "full name"
+  email    = email@email.com
+  username = "username"
 
 ; credential
 # Cache credentials in memory for a short period of time
 [credential]
   #credential.helper=osxkeychain
   helper = cache --timeout 7200
+
+# [url "git@github.com:"]
+#   insteadOf = https://github.com/

@@ -4,6 +4,7 @@
 # https://code.visualstudio.com/download
 # https://code.visualstudio.com/docs/setup/mac
 
+## Settings, .zprofile
 # Adding Visual Studio Code (code) to .zprofile
 typeset -r ZPROFILE="${HOME}/.zprofile"
 typeset -r vscode_app_path='/Applications/Visual Studio Code.app/Contents/Resources/app/bin'
@@ -16,6 +17,7 @@ EOF
 source "${ZPROFILE}"
 fi
 
+## Extensions
 # code --list-extensions
 # code --install-extension vscode-icons-team.vscode-icons@11.19.0
 # @installed

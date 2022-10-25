@@ -14,6 +14,12 @@ compinit
 COMPLETION_WAITING_DOTS="%F{blue}…%f"
 export COMPLETION_WAITING_DOTS
 
+## History
+# zstyle -L, zstyle :completion:history-words:
+zstyle ':completion:*:history-words' menu yes            # activate menu
+zstyle ':completion:*:history-words' remove-all-dups yes # ignore duplicate entries
+setopt EXTENDED_HISTORY
+
 ## Colors
 # man ls | grep -A 50 'LSCOLORS'
 CLICOLOR=1
@@ -36,21 +42,17 @@ plugins=(git macos brew ssh-agent tmux)
 # id_rsa gitlab_priv gitlab_work github_priv github_work
 zstyle ':omz:plugins:ssh-agent' identities id_rsa
 
-## Start oh-my-zsh
+## Source
+# Start oh-my-zsh
 source "${ZSH}/oh-my-zsh.sh"
-
-## Source other configs
+# Aliases
 source "${HOME}/.aliases"
 
 ## Themes
 #ZSH_THEME="spaceship"                              # Set theme to load. (agnoster, rkj-repos)
 source $(brew --prefix)/opt/spaceship/spaceship.zsh # (brew install spaceship), https://github.com/spaceship-prompt/spaceship-prompt
 
-## History
-# zstyle -L, zstyle :completion:history-words:
-zstyle ':completion:*:history-words' menu yes            # activate menu
-zstyle ':completion:*:history-words' remove-all-dups yes # ignore duplicate entries
-setopt EXTENDED_HISTORY
+## Additional Configurations
 
 # ## Python, pyenv
 # if command -v pyenv 1>/dev/null 2>&1; then
