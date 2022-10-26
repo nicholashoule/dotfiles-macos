@@ -1,7 +1,7 @@
 # https://git-scm.com/docs/gitmodules
 [submodule ".oh-my-zsh"]
-	path = .oh-my-zsh
+	path = home/.oh-my-zsh
 	url = http://github.com/robbyrussell/oh-my-zsh.git
 [submodule ".vim/bundle/Vundle.vim"]
-	path = .vim/bundle/Vundle.vim
+	path = home/.vim/bundle/Vundle.vim
 	url = https://github.com/VundleVim/Vundle.vim.git

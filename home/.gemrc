@@ -1,6 +1,4 @@
 ---
-gem: --no-rdoc --no-ri
----
 gem: --no-ri --no-rdoc
 :verbose: false
 :backtrace: false
