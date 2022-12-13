@@ -10,9 +10,9 @@ repos:
       - id: trailing-whitespace
       - id: mixed-line-ending
       - id: check-yaml
-  - repo: https://github.com/jumanjihouse/pre-commit-hooks
-    rev: 3.0.0
-    hooks:
-      - id: shellcheck
-        types: [shell]
-        args: [-e, SC1071, -e, SC2034]
+  # - repo: https://github.com/jumanjihouse/pre-commit-hooks
+  #   rev: 3.0.0
+  #   hooks:
+  #     - id: shellcheck
+  #       types: [shell]
+  #       args: [-e, SC1071, -e, SC2034]
