@@ -1,0 +1,33 @@
+name: CI - macOS
+
+# Controls when the workflow will run
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-12]
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          brew analytics on
+          brew update
+          brew install -sq coreutils
+
+      - name: Run (dotfiles - test)
+        shell: bash
+        run: |
+          pwd && ls -la        
