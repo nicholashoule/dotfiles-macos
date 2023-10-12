@@ -2,6 +2,10 @@
 [submodule "home/.oh-my-zsh"]
 	path = home/.oh-my-zsh
 	url = http://github.com/robbyrussell/oh-my-zsh.git
-[submodule "home/.vim/bundle/Vundle.vim"]
+[submodule "home/.vim/Vundle.vim"]
 	path = home/.vim/bundle/Vundle.vim
 	url = https://github.com/VundleVim/Vundle.vim.git
+# [submodule "home/.config/spaceship-prompt"]
+# 	path = home/.config/spaceship
+# 	url = https://github.com/spaceship-prompt/spaceship-prompt.git
+	
