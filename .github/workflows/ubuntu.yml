@@ -1,0 +1,29 @@
+name: CI - Ubuntu
+
+# Controls when the workflow will run
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Building on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-20.04, ubuntu-22.04]
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Run (dotfiles - test)
+        shell: bash
+        run: |
+          pwd && ls -la
+
